@@ -7,7 +7,7 @@ const days = ["Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartes
 
 function clock() {
     var date = new Date();
-    document.querySelector("#myClock").innerHTML = `${date.toLocaleString()} ${days[date.getDay()]}`;
+    document.querySelector("#myClock").innerHTML = `${date.toLocaleString()} ${days[date.getDay() - 1]}`;
 }
 
 setInterval(() => {
