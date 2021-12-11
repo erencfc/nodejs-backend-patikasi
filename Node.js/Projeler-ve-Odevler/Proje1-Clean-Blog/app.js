@@ -1,21 +1,32 @@
 const express = require("express");
+const ejs = require("ejs");
 const app = express();
 
-const PORT = 80;
+app.set("view engine", "ejs");
 
-const blog = {
-    id: 1,
-    title: "Blog Title",
-    description: "Blog description",
-};
+app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-    res.writeHead(200, { "Content-Type": "text/html" }).end(
-        JSON.stringify(blog)
-    );
+    res.render("index");
 });
 
-// app.get();
+app.get("/about", (req, res) => {
+    res.render("about");
+});
+
+app.get("/post", (req, res) => {
+    res.render("post");
+});
+
+app.get("/add_post", (req, res) => {
+    res.render("add_post");
+});
+
+app.get("*", (req, res) => {
+    res.writeHead(404, "text/html").end("<h1>404 NOT FOUND</h1>");
+});
+
+const PORT = 80;
 
 app.listen(PORT, () => {
     console.log(`Sunucu ${PORT} portunda başlatıldı.`);
