@@ -1,9 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
-const ejs = require("ejs");
 const app = express();
-const Post = require("./models/Post");
 const {
     getAllPosts,
     getPost,
