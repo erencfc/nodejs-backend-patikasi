@@ -16,7 +16,12 @@ const {
     getEditPage,
 } = require("./controllers/pageController");
 
-mongoose.connect("mongodb://localhost/cleanblog-test-db");
+mongoose
+    .connect(
+        "mongodb+srv://kleesd:arvSMaW6fCYz44sT@cluster0.bbx3r.mongodb.net/cleanBlogDB?retryWrites=true&w=majority"
+    )
+    .then(() => console.log("Connected."))
+    .catch((err) => console.log(err));
 
 app.set("view engine", "ejs");
 
@@ -43,7 +48,7 @@ app.get("/add", getAddPage);
 app.get("/posts/edit/:id", getEditPage);
 app.get("*", get404Page);
 
-const PORT = 80;
+const PORT = process.env.PORT || 80;
 
 app.listen(PORT, () => {
     console.log(`Sunucu ${PORT} portunda başlatıldı.`);
