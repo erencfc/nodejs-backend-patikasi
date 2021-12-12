@@ -1,14 +1,14 @@
 const express = require("express");
 const app = express();
+const pageRoute = require("./routes/pageRouter");
 
 app.set("view engine", "ejs");
 
 // MIDDLEWARES
 app.use(express.static("public"));
 
-app.get("/", (req, res) => {
-    res.status("200").send("INDEX SAYFASI");
-});
+// ROUTE
+app.use("/", pageRoute);
 
 const PORT = process.env.PORT || 80;
 
