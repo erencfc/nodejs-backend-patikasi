@@ -4,6 +4,19 @@ const methodOverride = require("method-override");
 const ejs = require("ejs");
 const app = express();
 const Post = require("./models/Post");
+const {
+    getAllPosts,
+    getPost,
+    editPost,
+    createPost,
+    deletePost,
+} = require("./controllers/postController");
+const {
+    getAboutPage,
+    getAddPage,
+    get404Page,
+    getEditPage,
+} = require("./controllers/pageController");
 
 mongoose.connect("mongodb://localhost/cleanblog-test-db");
 
@@ -19,58 +32,18 @@ app.use(
     })
 );
 
-app.get("/", async (req, res) => {
-    const posts = await Post.find({}).sort("-dateCreated");
-    res.render("index", {
-        posts,
-    });
-});
+// GET POST + CRUD
+app.get("/", getAllPosts);
+app.get("/posts/:id", getPost);
+app.put("/posts/:id", editPost);
+app.post("/posts", createPost);
+app.delete("/posts/:id", deletePost);
 
-app.get("/posts/:id", async (req, res) => {
-    const post = await Post.findById(req.params.id);
-    res.render("post", {
-        post,
-    });
-});
-
-app.get("/posts/edit/:id", async (req, res) => {
-    const post = await Post.findOne({ _id: req.params.id });
-    res.render("edit", { post });
-});
-
-app.get("/about", (req, res) => {
-    res.render("about");
-});
-
-app.get("/post", (req, res) => {
-    res.render("post");
-});
-
-app.get("/add", (req, res) => {
-    res.render("add");
-});
-
-app.get("*", (req, res) => {
-    res.writeHead(404, "text/html").end("<h1>404 NOT FOUND</h1>");
-});
-
-app.post("/posts", async (req, res) => {
-    await Post.create(req.body);
-    res.redirect("/");
-});
-
-app.put("/posts/:id", async (req, res) => {
-    const post = await Post.findOne({ _id: req.params.id });
-    post.title = req.body.title;
-    post.detail = req.body.detail;
-    post.save();
-    res.redirect(`/posts/${post._id}`);
-});
-
-app.delete("/posts/:id", async (req, res) => {
-    await Post.findOneAndDelete({ _id: req.params.id });
-    res.redirect("/");
-});
+// GET PAGES
+app.get("/about", getAboutPage);
+app.get("/add", getAddPage);
+app.get("/posts/edit/:id", getEditPage);
+app.get("*", get404Page);
 
 const PORT = 80;
 
