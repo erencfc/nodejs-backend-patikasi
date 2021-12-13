@@ -3,6 +3,7 @@ const {
     getIndexPage,
     getAboutPage,
     getContactPage,
+    getCoursesPage,
 } = require("../controllers/pageController");
 const router = express.Router();
 
