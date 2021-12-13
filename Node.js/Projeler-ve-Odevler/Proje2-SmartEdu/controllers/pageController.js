@@ -16,8 +16,8 @@ exports.getContactPage = (req, res) => {
     });
 };
 
-exports.getCoursesPage = (req, res) => {
-    res.status(200).render("courses", {
-        page_name: "courses",
+exports.getRegisterPage = (req, res) => {
+    res.status(200).render("register", {
+        page_name: "register",
     });
 };
