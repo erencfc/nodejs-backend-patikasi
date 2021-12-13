@@ -1,4 +1,5 @@
 const Course = require("../models/Course");
+const Category = require("../models/Category");
 
 exports.createCourse = async (req, res) => {
     try {
@@ -18,8 +19,10 @@ exports.createCourse = async (req, res) => {
 exports.getAllCourses = async (req, res) => {
     try {
         const courses = await Course.find();
+        const categories = await Category.find();
         res.status(200).render("courses", {
             courses: courses,
+            categories: categories,
             page_name: "courses",
         });
     } catch (error) {
