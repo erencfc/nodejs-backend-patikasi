@@ -10,12 +10,11 @@ exports.createCourse = async (req, res) => {
             category: req.body.category,
             user: req.session.userID,
         });
+        req.flash("success", `${course.name} has been created successfully.`);
         res.status(201).redirect("/courses");
     } catch (error) {
-        res.status(400).json({
-            status: "fail",
-            error,
-        });
+        req.flash("error", `Unfortunately we couldn't create ${course.name}`);
+        res.status(400).redirect("/courses");
     }
 };
 
@@ -91,6 +90,7 @@ exports.enrollCourse = async (req, res) => {
         await user.courses.push({ _id: req.body.course_id });
         await user.save();
 
+        req.flash("success", `The course is successfully enrolled.`);
         res.status(200).redirect("/users/dashboard");
     } catch (error) {
         res.status(400).json({
@@ -106,6 +106,7 @@ exports.releaseCourse = async (req, res) => {
         await user.courses.pull({ _id: req.body.course_id });
         await user.save();
 
+        req.flash("success", `The course is successfully released.`);
         res.status(200).redirect("/users/dashboard");
     } catch (error) {
         res.status(400).json({
