@@ -4,8 +4,10 @@
             <%- flashMessages.success %>
         </div>
     <% } else if (flashMessages.error) { %>
-        <div class="alert alert-danger">
-            <%- flashMessages.error %>
-        </div>
+        <% for( let i = 0; i < flashMessages.error.length; i++ ) { %>
+            <div class="alert alert-danger">
+                <%- flashMessages.error[i] %>
+            </div>
+        <% } %>
     <% } %>  
 <% } %>
