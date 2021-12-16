@@ -16,7 +16,7 @@
 						</div>
 						<div class="post-content">
 							<div class="post-date">
-								<% if (user && !(user.courses.includes(course._id))) { %>
+								<% if (user && !(user.courses.includes(course._id)) && user.role == 'student') { %>
 
 								<form action="/courses/enroll" method="post">
 									<input type="hidden" name="course_id" value="<%= course._id %>">
@@ -33,7 +33,7 @@
 							</div>
 							<div class="blog-desc">
 								<blockquote class="default">
-									<%= course.name %>
+									<%= course.description %>
 								</blockquote>
 							</div>							
 						</div>
