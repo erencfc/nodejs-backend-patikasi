@@ -6,6 +6,7 @@ const {
     loginUser,
     logoutUser,
     getDashboardPage,
+    deleteUser,
 } = require("../controllers/authController");
 const authMiddleware = require("../middlewares/authMiddleware");
 const User = require("../models/User");
@@ -46,5 +47,6 @@ router
     );
 router.route("/logout").get(logoutUser);
 router.route("/dashboard").get(authMiddleware, getDashboardPage);
+router.route("/:id").delete(deleteUser);
 
 module.exports = router;
