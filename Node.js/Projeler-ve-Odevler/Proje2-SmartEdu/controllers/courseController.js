@@ -13,7 +13,10 @@ exports.createCourse = async (req, res) => {
         req.flash("success", `${course.name} has been created successfully.`);
         res.status(201).redirect("/courses");
     } catch (error) {
-        req.flash("error", `Unfortunately we couldn't create ${course.name}`);
+        req.flash(
+            "error",
+            `Something went wrong! ${course.name} couldn't created.`
+        );
         res.status(400).redirect("/courses");
     }
 };
@@ -90,7 +93,7 @@ exports.enrollCourse = async (req, res) => {
         await user.courses.push({ _id: req.body.course_id });
         await user.save();
 
-        req.flash("success", `The course is successfully enrolled.`);
+        req.flash("success", `The course has been enrolled.`);
         res.status(200).redirect("/users/dashboard");
     } catch (error) {
         res.status(400).json({
@@ -106,7 +109,7 @@ exports.releaseCourse = async (req, res) => {
         await user.courses.pull({ _id: req.body.course_id });
         await user.save();
 
-        req.flash("success", `The course is successfully released.`);
+        req.flash("success", `The course has been released.`);
         res.status(200).redirect("/users/dashboard");
     } catch (error) {
         res.status(400).json({
@@ -119,7 +122,7 @@ exports.releaseCourse = async (req, res) => {
 exports.deleteCourse = async (req, res) => {
     try {
         const course = await Course.findOneAndRemove({ slug: req.params.slug });
-        req.flash("error", `${course.name} is successfully deleted.`);
+        req.flash("error", `${course.name} has been deleted.`);
         res.status(200).redirect("/users/dashboard");
     } catch (error) {
         res.status(400).json({
@@ -137,7 +140,7 @@ exports.updateCourse = async (req, res) => {
         course.category = req.body.category;
         course.save();
 
-        req.flash("success", `The course successfully updated.`);
+        req.flash("success", `The course updated successfully.`);
         res.status(200).redirect("/users/dashboard");
     } catch (error) {
         res.status(400).json({
