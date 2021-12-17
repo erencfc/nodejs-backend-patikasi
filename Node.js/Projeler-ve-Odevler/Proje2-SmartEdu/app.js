@@ -12,8 +12,11 @@ const userRoute = require("./routes/userRoute");
 
 const app = express();
 
+const mongoUrl =
+    "mongodb+srv://dbUser:q3o3FS97QAkfUREH@cluster0.mnuzf.mongodb.net/smartEduDB?retryWrites=true&w=majority";
+
 mongoose
-    .connect("mongodb://localhost/smartEduDB")
+    .connect(mongoUrl)
     .then(() => console.log("DB Connected!"))
     .catch((err) => console.log(err));
 
@@ -32,8 +35,7 @@ app.use(
         resave: false,
         saveUninitialized: true,
         store: MongoStore.create({
-            mongoUrl:
-                "mongodb+srv://dbUser:q3o3FS97QAkfUREH@cluster0.mnuzf.mongodb.net/smartEduDB?retryWrites=true&w=majority",
+            mongoUrl: mongoUrl,
         }),
     })
 );
