@@ -1,0 +1,128 @@
+query users {
+  users {
+    id
+    username
+    email
+    events {
+      id
+      title
+    }
+  }
+}
+
+query user {
+  user(id: 6) {
+    id
+    username
+    email
+    events {
+      id
+      title
+      location {
+        name
+        lat
+        lng
+      }
+      participants {
+        user {
+          id
+          username
+        }
+      }
+    }
+  }
+}
+
+query events {
+  events {
+    id
+    title
+    user{
+      id
+      username
+    }
+    participants{
+      id
+      username
+    }
+    location{
+      id
+      name
+    }
+  }
+}
+
+query event {
+  event(id: 7) {
+    title
+    user {
+      id
+      username
+    }
+    location {
+      name
+      lat
+      lng
+    }
+    participants {
+      user {
+        id
+        username
+      }
+    }
+  }
+}
+
+query locations {
+  locations {
+    id
+    name
+    lat
+    lng
+    event {
+      id
+      title
+    }
+  }
+}
+
+query location {
+	location(id: "9") {
+    id
+    name
+    lat
+    lng
+    event {
+      id
+      title
+      user {
+        id
+        username
+      }
+    }
+  }
+}
+
+query participants {
+  participants {
+    id
+    event {
+      id
+      title
+    }
+  }
+}
+
+query participant {
+  participant(id: "1") {
+    event {
+      id
+      title
+      location {
+        name
+        lat
+        lng
+      }
+    }
+  }
+}
