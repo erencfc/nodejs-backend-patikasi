@@ -1,0 +1,264 @@
+# User
+
+mutation addUser {
+  addUser(data: { username: "loremipsum4", email: "lorem@ipsum.com" }) {
+    id
+    username
+    email
+  }
+}
+
+mutation updateUser {
+  updateUser(
+    id: "1"
+    data: { username: "lorem6ipsum", email: "6lorem@gmail.com" }
+  ) {
+    id
+    username
+    email
+    events {
+      id
+      title
+      date
+    }
+  }
+}
+
+mutation deleteUser {
+  deleteUser(id: "1") {
+    username
+    email
+    events {
+      id
+      title
+      desc
+      date
+    }
+  }
+}
+
+mutation deleteAllUsers {
+  deleteAllUsers {
+    count
+  }
+}
+
+# Event
+
+mutation addEvent {
+  addEvent(
+    data: {
+      title: "Lorem ipsum event title 1"
+      desc: "Lorem ipsum event 1 description"
+      date: "2021-12-20"
+      from: "04:00"
+      to: "07.00"
+      location_id: 4
+      user_id: 5
+    }
+  ) {
+    id
+    title
+    desc
+    date
+    from
+    to
+    user {
+      username
+      email
+    }
+    location {
+      name
+      desc
+      lat
+      lng
+    }
+  }
+}
+
+mutation updateEvent {
+  updateEvent(
+    id: "2"
+    data: {
+      title: "Lorem ipsum updated event 1"
+      desc: "Lorem ipsum updated event 1 description"
+      date: "2021-12-28"
+      location_id: 10
+    }
+  ) {
+    id
+    title
+    desc
+    date
+    from
+    to
+    user {
+      id
+      username
+      email
+    }
+    location {
+      name
+      desc
+      lat
+      lng
+    }
+  }
+}
+
+mutation deleteEvent {
+  deleteEvent(id: "5") {
+    title
+    desc
+    date
+    from
+    to
+    user {
+      id
+      username
+      email
+    }
+    location {
+      name
+      desc
+      lat
+      lng
+    }
+    participants {
+      username
+    }
+  }
+}
+
+mutation deleteAllEvents {
+  deleteAllEvents {
+    count
+  }
+}
+
+# Location
+
+mutation addLocation {
+  addLocation(
+    data: {
+      name: "Lorem ipsum location 1"
+      desc: "Lorem ipsum location 1 description"
+      lat: -54.35915
+      lng: 50.12582
+    }
+  ) {
+    id
+    name
+    desc
+    lat
+    lng
+  }
+}
+
+mutation updateLocation {
+  updateLocation(
+    id: "1"
+    data: { name: "Updated location", desc: "Updated location description" }
+  ) {
+    name
+    desc
+    lat
+    lng
+    event {
+      id
+      title
+    }
+  }
+}
+
+mutation deleteLocation {
+  deleteLocation(id: "8") {
+    name
+    desc
+    lat
+    lng
+    event {
+      id
+      title
+      desc
+      date
+      from
+      to
+      user {
+        id
+        username
+        email
+      }
+    }
+  }
+}
+
+mutation deleteAllLocations {
+  deleteAllLocations {
+    count
+  }
+}
+
+# Participant
+
+mutation addParticipant {
+  addParticipant(data: { user_id: 15, event_id: 1 }) {
+    user {
+      id
+      username
+      email
+    }
+    event {
+      title
+      date
+      from
+      to
+      location {
+        name
+        lat
+        lng
+      }
+      user {
+        id
+        username
+        email
+      }
+      participants {
+        username
+      }
+    }
+  }
+}
+
+mutation updateParticipant {
+  updateParticipant(id: "2", data: { event_id: 5 }) {
+    username
+    event {
+      id
+      title
+    }
+  }
+}
+
+mutation deleteParticipant {
+  deleteParticipant(id: "2") {
+    user_id
+    event_id
+    user {
+      id
+      username
+      email
+    }
+    event {
+      id
+      title
+      date
+    }
+  }
+}
+
+mutation deleteAllParticipants {
+  deleteAllParticipants {
+    count
+  }
+}
