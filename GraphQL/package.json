@@ -4,13 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@graphql-tools/load-files": "^6.5.3",
+    "@graphql-tools/merge": "^8.2.1",
     "graphql-yoga": "^1.18.3",
     "nanoid": "^3.1.30"
+  },
+  "resolutions": {
+    "graphql-yoga": "1.18.3",
+    "**/graphql-yoga": "1.18.3"
   }
 }
