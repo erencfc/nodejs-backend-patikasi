@@ -1,0 +1,111 @@
+# User
+
+subscription userCreated {
+  userCreated {
+    id
+    username
+    email
+  }
+}
+
+subscription userUpdated {
+  userUpdated {
+    id
+    username
+    email
+  }
+}
+
+subscription userDeleted {
+  userDeleted {
+    id
+    username
+    email
+  }
+}
+
+
+
+# Event
+
+subscription eventCreated {
+  eventCreated {
+    id
+    title
+    desc
+    date
+    from
+    to
+    location_id
+    user_id
+    user {
+      id
+      username
+      email
+    }
+  }
+}
+
+subscription eventUpdated {
+  eventUpdated {
+    id
+    title
+    desc
+    date
+    from
+    to
+    location_id
+    user_id
+    user {
+      id
+      username
+      email
+    }
+  }
+}
+
+subscription eventDeleted {
+  eventDeleted {
+    id
+    title
+    desc
+    date
+    from
+    to
+    location_id
+    user_id
+    user {
+      id
+      username
+      email
+    }
+  }
+}
+
+
+
+# Participant
+
+subscription participantAdded {
+  participantAdded {
+    id
+    user_id
+    event_id
+  }
+}
+
+subscription participantUpdated {
+  participantUpdated {
+    id
+    user_id
+    event_id
+  }
+}
+
+subscription participantDeleted {
+  participantDeleted {
+    id
+    user_id
+    event_id
+  }
+}
