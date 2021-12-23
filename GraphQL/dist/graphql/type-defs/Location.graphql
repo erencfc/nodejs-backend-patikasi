@@ -1,0 +1,40 @@
+type Query {
+    locations: [Location!]!
+    location(id: ID!): Location!
+}
+
+type Mutation {
+    addLocation(data: addLocationInput!): Location!
+    updateLocation(id: ID!, data: updateLocationInput!): Location!
+    deleteLocation(id: ID!): Location!
+    deleteAllLocations: deleteAllOutput!
+}
+
+
+
+
+
+type Location {
+    id: ID!
+    name: String!
+    desc: String!
+    lat: Float!
+    lng: Float!
+    event: Event
+}
+
+# Inputs
+
+input addLocationInput {
+    name: String!
+    desc: String!
+    lat: Float!
+    lng: Float!
+}
+
+input updateLocationInput {
+    name: String
+    desc: String
+    lat: Float
+    lng: Float
+}

@@ -1,4 +1,4 @@
-const Query = {
+export const Query = {
     // Event
     events: (_, __, { db }) => db.events,
     event: (_, args, { db }) => db.events.find((event) => event.id == args.id),
@@ -17,5 +17,3 @@ const Query = {
     participant: (_, args, { db }) =>
         db.participants.find((participant) => participant.id == args.id),
 };
-
-module.exports.Query = Query;
