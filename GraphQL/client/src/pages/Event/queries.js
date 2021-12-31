@@ -1,4 +1,5 @@
 import { gql } from "@apollo/client";
+import { participantFragment } from "./fragments";
 
 export const GET_EVENT_DETAILS = gql`
     query getEventDetails($id: ID!) {
@@ -29,24 +30,20 @@ export const GET_EVENT_PARTICIPANTS = gql`
     query getEventParticipants($id: ID!) {
         event(id: $id) {
             participants {
-                user {
-                    username
-                    email
-                }
+                ...ParticipantFragment
             }
         }
     }
+    ${participantFragment}
 `;
 
 export const PARTICIPANTS_SUBSCRIPTION = gql`
     subscription participantAdded($event_id: ID) {
         participantAdded(event_id: $event_id) {
-            user {
-                username
-                email
-            }
+            ...ParticipantFragment
         }
     }
+    ${participantFragment}
 `;
 
 export const GET_EVENT_OWNER = gql`
