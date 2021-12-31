@@ -23,6 +23,9 @@ function Participants() {
                 document: PARTICIPANTS_SUBSCRIPTION,
                 variables: { event_id: id },
                 updateQuery: (prev, { subscriptionData }) => {
+                    console.log("prev", prev);
+                    console.log("subscriptionData", subscriptionData);
+
                     if (!subscriptionData.data) return prev;
 
                     const newParticipantItem =
