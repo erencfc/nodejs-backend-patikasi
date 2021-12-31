@@ -33,9 +33,9 @@ type Event {
 # Inputs
 
 input addEventInput {
-    title: String
-    desc: String
-    date: String
+    title: String!
+    desc: String!
+    date: String!
     from: String!
     to: String!
     location_id: Int!

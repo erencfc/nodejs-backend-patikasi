@@ -1,3 +1,5 @@
+import { withFilter } from "graphql-yoga";
+
 export const Subscription = {
     // User
     userCreated: {
@@ -23,8 +25,11 @@ export const Subscription = {
 
     // Participant
     participantAdded: {
-        subscribe: (_, __, { pubsub }) =>
-            pubsub.asyncIterator("participantAdded"),
+        subscribe: withFilter(
+            (_, __, { pubsub }) => pubsub.asyncIterator("participantAdded"),
+            (payload, variables) =>
+                payload.participantAdded.event_id == variables.event_id
+        ),
     },
     participantUpdated: {
         subscribe: (_, __, { pubsub }) =>

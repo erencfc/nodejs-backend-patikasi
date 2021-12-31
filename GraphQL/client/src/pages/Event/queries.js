@@ -38,6 +38,17 @@ export const GET_EVENT_PARTICIPANTS = gql`
     }
 `;
 
+export const PARTICIPANTS_SUBSCRIPTION = gql`
+    subscription participantAdded($event_id: ID) {
+        participantAdded(event_id: $event_id) {
+            user {
+                username
+                email
+            }
+        }
+    }
+`;
+
 export const GET_EVENT_OWNER = gql`
     query getEventOwner($id: ID!) {
         event(id: $id) {

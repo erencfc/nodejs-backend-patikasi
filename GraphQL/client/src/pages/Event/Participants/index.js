@@ -1,17 +1,46 @@
-import React from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { GET_EVENT_PARTICIPANTS } from "../queries";
+import { GET_EVENT_PARTICIPANTS, PARTICIPANTS_SUBSCRIPTION } from "../queries";
 import { Card, Col, Row } from "antd";
 
 function Participants() {
     const { id } = useParams();
 
-    const { loading, error, data } = useQuery(GET_EVENT_PARTICIPANTS, {
-        variables: {
-            id,
-        },
-    });
+    const { called, loading, error, data, subscribeToMore } = useQuery(
+        GET_EVENT_PARTICIPANTS,
+        {
+            variables: {
+                id,
+                event_id: id,
+            },
+        }
+    );
+
+    useEffect(() => {
+        if (!loading && called) {
+            subscribeToMore({
+                document: PARTICIPANTS_SUBSCRIPTION,
+                variables: { event_id: id },
+                updateQuery: (prev, { subscriptionData }) => {
+                    if (!subscriptionData.data) return prev;
+
+                    const newParticipantItem =
+                        subscriptionData.data.participantAdded;
+
+                    return {
+                        event: {
+                            ...prev.participants,
+                            participants: [
+                                ...prev.event.participants,
+                                newParticipantItem,
+                            ],
+                        },
+                    };
+                },
+            });
+        }
+    }, [id, loading, called, subscribeToMore]);
 
     if (loading) {
         return <div>Loading...</div>;

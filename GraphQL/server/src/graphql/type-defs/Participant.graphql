@@ -11,12 +11,10 @@ type Mutation {
 }
 
 type Subscription {
-    participantAdded: Participant!
+    participantAdded(event_id: ID): Participant!
     participantUpdated: Participant!
     participantDeleted: Participant!
 }
-
-
 
 type Participant {
     id: ID!

@@ -33,3 +33,14 @@ export const CREATE_EVENT = gql`
         }
     }
 `;
+
+export const EVENTS_SUBSCRIPTION = gql`
+    subscription {
+        eventCreated {
+            id
+            title
+            desc
+            date
+        }
+    }
+`;

@@ -55,6 +55,7 @@
 
 .cardItem {
     margin: 0 15px;
+    display: block !important;
 }
 
 .cardList {

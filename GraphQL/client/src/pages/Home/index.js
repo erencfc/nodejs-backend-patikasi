@@ -1,8 +1,9 @@
+import { useEffect } from "react";
 import { Typography, Form, Input, Button, message, List, Card } from "antd";
 import styles from "./styles.module.css";
 import "antd/dist/antd.min.css";
 import { useQuery, useMutation } from "@apollo/client";
-import { GET_EVENTS, CREATE_EVENT } from "./queries";
+import { GET_EVENTS, CREATE_EVENT, EVENTS_SUBSCRIPTION } from "./queries";
 import { Link } from "react-router-dom";
 import React from "react";
 
@@ -10,7 +11,23 @@ const { Title } = Typography;
 
 function Home() {
     const [saveEvent] = useMutation(CREATE_EVENT);
-    const { loading, error, data } = useQuery(GET_EVENTS);
+    const { loading, error, data, subscribeToMore } = useQuery(GET_EVENTS);
+
+    useEffect(() => {
+        subscribeToMore({
+            document: EVENTS_SUBSCRIPTION,
+            updateQuery: (prev, { subscriptionData }) => {
+                if (!subscriptionData.data) return prev;
+
+                return {
+                    events: [
+                        subscriptionData.data.eventCreated,
+                        ...prev.events,
+                    ],
+                };
+            },
+        });
+    }, [subscribeToMore]);
 
     const handleSubmit = async (values) => {
         try {
@@ -116,7 +133,7 @@ function Home() {
                                 </Link>
                             }
                             extra={Intl.DateTimeFormat("en-US")
-                                .format(new Date(item.date + "T00:00:00"))
+                                .format(new Date(item.date))
                                 .replaceAll("/", ".")} // Format Date
                             className={styles.cardEvent}
                         >

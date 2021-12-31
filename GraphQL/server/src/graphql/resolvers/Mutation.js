@@ -45,7 +45,7 @@ export const Mutation = {
             id: nanoid(),
             ...data,
         };
-        db.events.push(event);
+        db.events.unshift(event);
         pubsub.publish("eventCreated", { eventCreated: event });
         return event;
     },
