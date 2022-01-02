@@ -1,16 +1,17 @@
 import { useEffect } from "react";
-import { Typography, Form, Input, Button, message, List, Card } from "antd";
+import { Typography, List, Card } from "antd";
 import styles from "./styles.module.css";
 import "antd/dist/antd.min.css";
-import { useQuery, useMutation } from "@apollo/client";
-import { GET_EVENTS, CREATE_EVENT, EVENTS_SUBSCRIPTION } from "./queries";
+import { useQuery } from "@apollo/client";
+import { GET_EVENTS, EVENTS_SUBSCRIPTION } from "./queries";
 import { Link } from "react-router-dom";
 import React from "react";
+import CreateEvent from "./CreateEvent";
+import Loading from "components/Loading";
 
 const { Title } = Typography;
 
 function Home() {
-    const [saveEvent] = useMutation(CREATE_EVENT);
     const { loading, error, data, subscribeToMore } = useQuery(GET_EVENTS);
 
     useEffect(() => {
@@ -29,29 +30,8 @@ function Home() {
         });
     }, [subscribeToMore]);
 
-    const handleSubmit = async (values) => {
-        try {
-            await Object.assign(values, {
-                from: "08:00",
-                to: "10:00",
-                location_id: 2,
-                user_id: 4,
-            });
-
-            await saveEvent({
-                variables: {
-                    data: values,
-                },
-            });
-            message.success("Event saved!", 4);
-        } catch (e) {
-            console.log(e);
-            message.error("Event not saved!", 10);
-        }
-    };
-
     if (loading) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
     if (error) {
         return <div>Error: {error.message}</div>;
@@ -64,57 +44,7 @@ function Home() {
             </div>
             <hr />
 
-            <div className={styles.form}>
-                <Form
-                    name="basic"
-                    onFinish={handleSubmit}
-                    labelCol={{ span: 8 }}
-                    wrapperCol={{ span: 16 }}
-                    autoComplete="off"
-                >
-                    <Form.Item
-                        label="Title:"
-                        name="title"
-                        className={styles.formItem}
-                    >
-                        <Input
-                            required={true}
-                            placeholder="Enter event title"
-                        />
-                    </Form.Item>
-
-                    <Form.Item
-                        label="Description:"
-                        name="desc"
-                        className={styles.formItem}
-                    >
-                        <Input
-                            required={true}
-                            placeholder="Enter event description"
-                        />
-                    </Form.Item>
-
-                    <Form.Item
-                        label="Event Date:"
-                        name="date"
-                        className={styles.formItem}
-                    >
-                        <Input
-                            required={true}
-                            placeholder="Enter date (yyyy-mm-dd)"
-                        />
-                    </Form.Item>
-                    <Form.Item>
-                        <Button
-                            htmlType="submit"
-                            type="primary"
-                            className={styles.formBtn}
-                        >
-                            Add Event
-                        </Button>
-                    </Form.Item>
-                </Form>
-            </div>
+            <CreateEvent />
 
             <List
                 className={styles.cardList}

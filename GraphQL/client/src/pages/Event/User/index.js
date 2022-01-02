@@ -5,6 +5,7 @@ import { Typography } from "antd";
 
 import { GET_EVENT_OWNER } from "../queries";
 import styles from "../styles.module.css";
+import Loading from "components/Loading";
 
 const { Title, Text } = Typography;
 
@@ -18,15 +19,13 @@ function User() {
     });
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
     if (error) {
         return <div>Error: {error.message}</div>;
     }
 
     const user = data.event.user;
-
-    console.log(user);
 
     return (
         <div>

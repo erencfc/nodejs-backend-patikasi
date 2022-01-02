@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_EVENT_PARTICIPANTS, PARTICIPANTS_SUBSCRIPTION } from "../queries";
 import { Card, Col, Row } from "antd";
+import Loading from "components/Loading";
 
 function Participants() {
     const { id } = useParams();
@@ -43,7 +44,7 @@ function Participants() {
     }, [id, loading, called, subscribeToMore]);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
     if (error) {
         return <div>Error: {error.message}</div>;

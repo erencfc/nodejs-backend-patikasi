@@ -4,6 +4,7 @@ import { Divider, Typography } from "antd";
 
 import { GET_EVENT_LOCATION } from "../queries";
 import styles from "../styles.module.css";
+import Loading from "components/Loading";
 
 const { Title, Text } = Typography;
 
@@ -17,14 +18,13 @@ function Location() {
     });
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
     if (error) {
         return <div>Error: {error.message}</div>;
     }
 
     const location = data.event.location;
-    console.log(location);
 
     return (
         <div className={styles.title}>

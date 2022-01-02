@@ -41,3 +41,21 @@ export const CREATE_EVENT = gql`
         }
     }
 `;
+
+export const GET_USERS = gql`
+    query getAllUsers {
+        users {
+            id
+            username
+        }
+    }
+`;
+
+export const GET_LOCATIONS = gql`
+    query getAllLocations {
+        locations {
+            id
+            name
+        }
+    }
+`;

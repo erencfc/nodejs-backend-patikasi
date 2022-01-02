@@ -5,6 +5,7 @@ import { GET_EVENT_DETAILS } from "../queries";
 import { Divider, Typography } from "antd";
 
 import styles from "../styles.module.css";
+import Loading from "components/Loading";
 
 const { Title, Text } = Typography;
 
@@ -18,7 +19,7 @@ function Details() {
     });
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
     if (error) {
         return <div>Error: {error.message}</div>;

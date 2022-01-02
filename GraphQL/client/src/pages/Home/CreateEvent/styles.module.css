@@ -1,0 +1,60 @@
+.form {
+    background-color: #aaa;
+    width: 30%;
+    padding-top: 30px;
+    margin: 20px auto;
+    border-radius: 8px;
+    font-size: 18px;
+}
+
+.form input,
+.form TextArea {
+    width: 100%;
+    padding: 8px 15px;
+    margin: 0px 25%;
+    border-radius: 10px;
+}
+
+.form input:disabled {
+    background-color: #e0e0e0;
+}
+
+.select {
+    margin-top: -5%;
+    margin-left: 15%;
+}
+
+.timeInput {
+    display: inline-block;
+    width: calc(50% - 8px);
+    padding: 10px;
+}
+.timeInput:last-child {
+    position: absolute;
+    margin-left: 20%;
+}
+
+.selectItem {
+    display: inline-block;
+    margin-left: 10px;
+    width: 45%;
+}
+
+.selectItem:last-child {
+    position: absolute;
+    margin-left: 28%;
+}
+
+.formBtn {
+    border: none !important;
+    padding: 0px 25px !important;
+    font-size: 22px;
+    margin-left: 56% !important;
+    margin-bottom: 35px;
+    cursor: pointer !important;
+    border-radius: 10px !important;
+}
+
+.btnItem {
+    margin-top: -4% !important;
+}
