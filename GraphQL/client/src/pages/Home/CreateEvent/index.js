@@ -13,9 +13,6 @@ function CreateEvent() {
 
     const handleSubmit = async (values) => {
         try {
-            values.location_id = values.location_id * 1;
-            values.user_id = values.user_id * 1;
-
             await saveEvent({
                 variables: {
                     data: values,
@@ -65,7 +62,7 @@ function CreateEvent() {
                 </Form.Item>
 
                 <Form.Item className={styles.select}>
-                    <Form.Item name="user_id" className={styles.selectItem}>
+                    <Form.Item name="user" className={styles.selectItem}>
                         <Select
                             disabled={users_loading || loading}
                             loading={users_loading || loading}
@@ -84,7 +81,7 @@ function CreateEvent() {
                         </Select>
                     </Form.Item>
 
-                    <Form.Item name="location_id" className={styles.selectItem}>
+                    <Form.Item name="location" className={styles.selectItem}>
                         <Select
                             disabled={locations_loading || loading}
                             loading={locations_loading || loading}
