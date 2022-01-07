@@ -1,10 +1,6 @@
 export const Participant = {
-    user: (parent, __, { db }) =>
-        db.users.find((user) => user.id === parent.user_id),
-    username: (parent, __, { db }) =>
-        db.users.find((user) => user.id === parent.user_id).username,
-    user_id: (parent, __, { db }) =>
-        db.users.find((user) => user.id === parent.user_id).id,
-    event: (parent, __, { db }) =>
-        db.events.filter((event) => event.id === parent.event_id),
+    user: async (parent, __, { _db }) =>
+        await _db.User.findById(parent.user._id),
+    event: async (parent, __, { _db }) =>
+        await _db.Event.findById(parent.event._id),
 };

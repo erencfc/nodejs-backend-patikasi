@@ -23,8 +23,6 @@ type Event {
     date: String!
     from: String!
     to: String!
-    location_id: Int!
-    user_id: Int!
     user: User!
     location: Location!
     participants: [Participant]!
@@ -38,8 +36,8 @@ input addEventInput {
     date: String!
     from: String!
     to: String!
-    location_id: Int!
-    user_id: Int!
+    location: ID!
+    user: ID!
 }
 
 input updateEventInput {
@@ -48,6 +46,6 @@ input updateEventInput {
     date: String
     from: String
     to: String
-    location_id: Int
-    user_id: Int
+    location: ID
+    user: ID
 }

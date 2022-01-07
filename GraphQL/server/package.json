@@ -13,7 +13,9 @@
   "dependencies": {
     "@graphql-tools/load-files": "^6.5.3",
     "@graphql-tools/merge": "^8.2.1",
+    "dotenv": "^10.0.0",
     "graphql-yoga": "^1.18.3",
+    "mongoose": "^6.1.5",
     "nanoid": "^3.1.30"
   },
   "resolutions": {

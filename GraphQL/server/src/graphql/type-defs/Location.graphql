@@ -20,7 +20,7 @@ type Location {
     desc: String!
     lat: Float!
     lng: Float!
-    event: Event
+    events: [Event]!
 }
 
 # Inputs

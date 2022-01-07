@@ -1,4 +1,6 @@
 export const User = {
-    events: (parent, __, { db }) =>
-        db.events.filter((event) => event.user_id === parent.id),
+    events: async (parent, __, { _db }) => {
+        const events = await _db.Event.find({ user: parent.id });
+        return events;
+    },
 };

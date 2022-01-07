@@ -1,4 +1,6 @@
 export const Location = {
-    event: (parent, __, { db }) =>
-        db.events.find((event) => parent.id === event.location_id),
+    events: async (parent, __, { _db }) => {
+        const events = await _db.Event.find({ location: parent.id });
+        return events;
+    },
 };
