@@ -1,0 +1,26 @@
+{
+    "name": "countries-graphql",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "scripts": {
+        "dev": "nodemon -e .js,.graphql --exec babel-node -- ./src/index.js"
+    },
+    "dependencies": {
+        "@graphql-tools/load-files": "^6.5.3",
+        "@graphql-tools/merge": "^8.2.1",
+        "countries-list": "^2.6.1",
+        "graphql-yoga": "^1.18.3"
+    },
+    "resolutions": {
+        "graphql-yoga": "1.18.3",
+        "**/graphql-yoga": "^1.18.3"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.16.8",
+        "@babel/core": "^7.16.12",
+        "@babel/node": "^7.16.8",
+        "@babel/preset-env": "^7.16.11",
+        "babel-plugin-module-resolver": "^4.1.0"
+    }
+}
